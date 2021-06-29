@@ -5,13 +5,7 @@ import base64
 archivo = st.file_uploader('Csv Mañoso')
 
 if archivo:
-    try:
-        df = pd.read_csv(archivo, sep = ';')
-    except:
-        try:
-            df = pd.read_csv(archivo, sep = ',')
-        except:
-            df = pd.read_csv(archivo, sep='\t', lineterminator='\r')
+    df = dt.fread("catalog_products (2).csv").to_pandas()
     df['visible'] = df['visible'].apply(lambda x: str(x).upper())
     csv = df.to_csv(index=False, sep=',')
     b64 = base64.b64encode(csv.encode()).decode()
