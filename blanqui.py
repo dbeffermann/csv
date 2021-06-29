@@ -6,7 +6,7 @@ import datatable as dt
 archivo = st.file_uploader('Csv Mañoso')
 
 if archivo:
-    df = dt.fread(archivo).to_pandas()
+    pd.read_csv("catalog_products (2).csv", sep = '\t', encoding = 'latin1')
     df['visible'] = df['visible'].apply(lambda x: str(x).upper())
     csv = df.to_csv(index=False, sep=',')
     b64 = base64.b64encode(csv.encode()).decode()
