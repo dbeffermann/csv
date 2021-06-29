@@ -8,7 +8,10 @@ if archivo:
     try:
         df = pd.read_csv(archivo, sep = ';')
     except:
-        df = pd.read_csv(archivo, sep = ',')
+        try:
+            df = pd.read_csv(archivo, sep = ',')
+        except:
+            df = pd.read_csv(archivo, sep='\t', lineterminator='\r')
     df['visible'] = df['visible'].apply(lambda x: str(x).upper())
     csv = df.to_csv(index=False, sep=',')
     b64 = base64.b64encode(csv.encode()).decode()
